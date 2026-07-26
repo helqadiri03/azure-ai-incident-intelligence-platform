@@ -22,8 +22,8 @@ variable "tags" {
 }
 
 variable "access_principal_ids" {
-  type    = list(string)
-  default = []
-  description = "List of principal IDs (object IDs) to grant secret read permissions on the key vault"
+  type    = map(string)
+  default = {}
+  description = "Map of principal identifiers to object IDs to grant secret read permissions on the key vault"
 }
 

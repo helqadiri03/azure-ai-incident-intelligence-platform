@@ -1,0 +1,36 @@
+name: 'aiip'
+version: '1.0.0'
+config-version: 2
+
+profile: 'aiip_synapse'
+
+# Paths
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+# Global model config
+models:
+  aiip:
+    # Staging: views directly over Synapse external table / OPENROWSET view
+    staging:
+      +materialized: view
+      +schema: staging
+
+    # Intermediate: cleaned, joined, typed
+    intermediate:
+      +materialized: view
+      +schema: intermediate
+
+    # Mart: final aggregated tables for dashboards + RAG
+    mart:
+      +materialized: table
+      +schema: mart

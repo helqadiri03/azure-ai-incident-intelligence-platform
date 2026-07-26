@@ -33,3 +33,24 @@ azureProfile.json
 # OS files
 .DS_Store
 Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.virtualenv/
+
+# Environment / secrets
+.env
+.env.*
+*.env
+
+# Ingestion-specific
+ingestion/output/

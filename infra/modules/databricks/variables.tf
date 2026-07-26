@@ -12,7 +12,7 @@ variable "location" {
 
 variable "sku" {
   type    = string
-  default = "standard"
+  default = "premium"
 }
 
 variable "tags" {

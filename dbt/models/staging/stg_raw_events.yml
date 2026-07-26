@@ -1,0 +1,63 @@
+version: 2
+
+models:
+  - name: stg_raw_events
+    description: >
+      Staged event envelope — all raw AIIP telemetry with typed columns and
+      parsed common payload fields. One row per event across all signal types.
+    columns:
+      - name: event_id
+        description: Unique event identifier
+        tests:
+          - not_null
+          - unique
+
+      - name: event_type
+        description: "deployment | log | k8s_event | metric | trace"
+        tests:
+          - not_null
+          - accepted_values:
+              name: event_type_valid_values
+              values: ["deployment", "log", "k8s_event", "metric", "trace"]
+
+      - name: signal_source
+        description: "Origin system: github_actions | app_logs | k8s_logs | prometheus | opentelemetry"
+        tests:
+          - not_null
+
+      - name: event_at
+        description: Event timestamp cast to DATETIME2
+        tests:
+          - not_null
+
+      - name: service_name
+        description: AIIP microservice name
+        tests:
+          - not_null
+
+      - name: payload
+        description: Full JSON payload blob
+
+      - name: log_level
+        description: "Log level for app_logs: ERROR | WARN | INFO | DEBUG"
+
+      - name: log_message
+        description: Human-readable message for log and k8s events
+
+      - name: k8s_reason
+        description: "Kubernetes event reason: OOMKilled | CrashLoopBackOff | Evicted etc."
+
+      - name: metric_name
+        description: Prometheus metric name
+
+      - name: metric_value
+        description: Metric scalar value (FLOAT)
+
+      - name: trace_id
+        description: OpenTelemetry trace ID (32-char hex)
+
+      - name: deployment_conclusion
+        description: "GitHub Actions conclusion: success | failure | cancelled | null"
+
+      - name: _loaded_at
+        description: UTC timestamp when this row was processed by dbt

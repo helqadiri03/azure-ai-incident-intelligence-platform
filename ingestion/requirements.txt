@@ -1,0 +1,13 @@
+# ingestion/requirements.txt
+# Core Azure SDK
+azure-identity>=1.17.0
+azure-keyvault-secrets>=4.8.0
+
+# Phase 1.3 – Event Hub (now wired)
+azure-eventhub>=5.11.0
+
+# GitHub API
+requests>=2.32.0
+
+# Local dev helpers
+python-dotenv>=1.0.0
