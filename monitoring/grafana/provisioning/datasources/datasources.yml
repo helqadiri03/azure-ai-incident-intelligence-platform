@@ -1,0 +1,20 @@
+apiVersion: 1
+
+datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: http://prometheus:9090
+    isDefault: true
+
+  - name: Synapse
+    type: mssql
+    access: proxy
+    url: ${SYNAPSE_HOST}:1433
+    database: ${SYNAPSE_DB}
+    user: ${SYNAPSE_USER}
+    secureJsonData:
+      password: ${SYNAPSE_PASSWORD}
+    jsonData:
+      encrypt: "true"
+      trustServerCertificate: "false"

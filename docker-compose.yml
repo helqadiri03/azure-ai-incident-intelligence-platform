@@ -1,0 +1,57 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    container_name: incident_intelligence_backend
+    ports:
+      - "8001:8001"
+    environment:
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - SEARCH_ENDPOINT=${SEARCH_ENDPOINT:-}
+      - SEARCH_API_KEY=${SEARCH_API_KEY:-}
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: incident_intelligence_frontend
+    ports:
+      - "5174:80"
+    depends_on:
+      - backend
+    networks:
+      - app_network
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: incident_intelligence_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    networks:
+      - app_network
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: incident_intelligence_grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - SYNAPSE_HOST=${SYNAPSE_HOST:-synapse-workspace.database.windows.net}
+      - SYNAPSE_DB=${SYNAPSE_DB:-sqldb}
+      - SYNAPSE_USER=${SYNAPSE_USER:-sqladminuser}
+      - SYNAPSE_PASSWORD=${SYNAPSE_PASSWORD:-password}
+    volumes:
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+      - ./monitoring/grafana/dashboards:/etc/grafana/dashboards
+    depends_on:
+      - prometheus
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge

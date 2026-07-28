@@ -54,3 +54,9 @@ env/
 
 # Ingestion-specific
 ingestion/output/
+
+# Node.js
+node_modules/
+
+# Terraform Plans
+*.tfplan

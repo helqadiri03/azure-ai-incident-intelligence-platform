@@ -110,3 +110,15 @@ resource "azurerm_key_vault_secret" "storage_account_key" {
 	tags         = var.tags
 	depends_on   = [module.key_vault]
 }
+
+# ── Phase 4: Azure AI Search ─────────────────────────────────────────────────
+module "ai_search" {
+	source              = "../../modules/ai_search"
+	name                = var.ai_search_name
+	resource_group_name = module.resource_group.name
+	location            = var.location
+	sku                 = var.ai_search_sku
+	key_vault_id        = module.key_vault.id
+	tags                = var.tags
+	depends_on          = [module.key_vault]
+}

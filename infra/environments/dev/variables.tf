@@ -70,4 +70,14 @@ variable "my_ip_address" {
   default     = "0.0.0.0"
 }
 
+# ── Phase 4: Azure AI Search ─────────────────────────────────────────────────
+variable "ai_search_name" {
+  type        = string
+  description = "Globally unique name for the Azure AI Search service (e.g. srch-aiip-dev-frc-001)"
+}
 
+variable "ai_search_sku" {
+  type        = string
+  description = "Pricing tier for AI Search: free | basic | standard"
+  default     = "basic"
+}
