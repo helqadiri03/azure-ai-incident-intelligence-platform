@@ -1,317 +1,514 @@
 {
-  "annotations": {
-    "list": [
-      {
-        "builtIn": 1,
-        "datasource": {
-          "type": "grafana",
-          "uid": "-- Grafana --"
-        },
-        "enable": true,
-        "hide": true,
-        "iconColor": "rgba(0, 211, 255, 1)",
-        "name": "Annotations & Alerts",
-        "type": "dashboard"
-      }
-    ]
-  },
-  "editable": true,
-  "fiscalYearStartMonth": 0,
-  "graphTooltip": 0,
-  "id": 1,
-  "links": [],
-  "liveNow": false,
+  "title": "Incident Intelligence Overview",
+  "uid": "e15967ee-e0fa-400c-b26a-b2f518e98629",
+  "tags": [],
+  "schemaVersion": 39,
+  "version": 2,
   "panels": [
     {
-      "datasource": {
-        "type": "mssql",
-        "uid": "Synapse"
-      },
+      "id": 100,
+      "type": "row",
+      "title": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 AI INCIDENT INTELLIGENCE PLATFORM \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
       "gridPos": {
-        "h": 6,
-        "w": 6,
         "x": 0,
-        "y": 0
-      },
-      "id": 1,
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "mssql",
-            "uid": "Synapse"
-          },
-          "rawSql": "SELECT COUNT(*) as Total_Incidents FROM mart_incident_summary",
-          "refId": "A",
-          "format": "table"
-        }
-      ],
-      "title": "Total Incidents",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "mssql",
-        "uid": "Synapse"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 6,
-        "y": 0
-      },
-      "id": 2,
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "mssql",
-            "uid": "Synapse"
-          },
-          "rawSql": "SELECT COUNT(*) as Critical_Incidents FROM mart_incident_summary WHERE severity = 'Critical'",
-          "refId": "A",
-          "format": "table"
-        }
-      ],
-      "title": "Critical Incidents",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "mssql",
-        "uid": "Synapse"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 12,
-        "y": 0
-      },
-      "id": 3,
-      "options": {
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "mssql",
-            "uid": "Synapse"
-          },
-          "rawSql": "SELECT 18 as Avg_Resolution_Time",
-          "refId": "A",
-          "format": "table"
-        }
-      ],
-      "title": "Avg Resolution Time (min)",
-      "type": "stat"
-    },
-    {
-      "datasource": {
-        "type": "mssql",
-        "uid": "Synapse"
-      },
-      "gridPos": {
-        "h": 8,
+        "y": 0,
         "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "id": 1,
+      "title": "Total Incidents",
+      "type": "stat",
+      "gridPos": {
         "x": 0,
-        "y": 6
+        "y": 1,
+        "w": 6,
+        "h": 4
       },
-      "id": 4,
-      "options": {
-        "orientation": "horizontal",
-        "reduceOptions": {
-          "calcs": ["lastNotNull"],
-          "fields": "",
-          "values": false
-        },
-        "showUnfilled": true
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
       },
-      "pluginVersion": "10.4.0",
       "targets": [
         {
-          "datasource": {
-            "type": "mssql",
-            "uid": "Synapse"
-          },
-          "rawSql": "SELECT root_cause, COUNT(*) as Count FROM mart_incident_summary GROUP BY root_cause ORDER BY Count DESC",
           "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT COUNT(*) FROM dbo_mart.mart_incident_summary",
           "format": "table"
         }
       ],
-      "title": "Top Root Causes",
-      "type": "barchart"
-    },
-    {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "Prometheus"
-      },
-      "gridPos": {
-        "h": 6,
-        "w": 6,
-        "x": 0,
-        "y": 14
-      },
-      "id": 5,
       "options": {
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "Prometheus"
-          },
-          "expr": "rag_total_requests_total",
-          "refId": "A"
-        }
-      ],
-      "title": "Total RAG Requests",
-      "type": "stat"
+      }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "Prometheus"
-      },
+      "id": 2,
+      "title": "Critical Incidents",
+      "type": "stat",
       "gridPos": {
-        "h": 6,
-        "w": 6,
         "x": 6,
-        "y": 14
+        "y": 1,
+        "w": 6,
+        "h": 4
       },
-      "id": 6,
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT COUNT(*) FROM dbo_mart.mart_incident_summary WHERE severity = 'Critical'",
+          "format": "table"
+        }
+      ],
       "options": {
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "Prometheus"
-          },
-          "expr": "rag_avg_llm_latency_ms",
-          "refId": "A"
-        }
-      ],
-      "title": "Avg LLM Latency (ms)",
-      "type": "stat"
+      }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "Prometheus"
-      },
+      "id": 3,
+      "title": "Open Incidents",
+      "type": "stat",
       "gridPos": {
-        "h": 6,
-        "w": 6,
         "x": 12,
-        "y": 14
+        "y": 1,
+        "w": 6,
+        "h": 4
       },
-      "id": 7,
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT COUNT(*) FROM dbo_mart.fct_incidents WHERE duration_minutes IS NULL",
+          "format": "table"
+        }
+      ],
       "options": {
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "textMode": "auto"
-      },
-      "pluginVersion": "10.4.0",
-      "targets": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "Prometheus"
-          },
-          "expr": "rag_total_tokens_approx_total",
-          "refId": "A"
-        }
-      ],
-      "title": "Total Tokens Used",
-      "type": "stat"
+      }
     },
     {
-      "datasource": {
-        "type": "prometheus",
-        "uid": "Prometheus"
-      },
+      "id": 4,
+      "title": "Average MTTR (min)",
+      "type": "stat",
       "gridPos": {
-        "h": 6,
-        "w": 6,
         "x": 18,
-        "y": 14
+        "y": 1,
+        "w": 6,
+        "h": 4
       },
-      "id": 8,
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT AVG(duration_minutes) FROM dbo_mart.fct_incidents",
+          "format": "table"
+        }
+      ],
       "options": {
         "reduceOptions": {
-          "calcs": ["lastNotNull"],
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      }
+    },
+    {
+      "id": 101,
+      "type": "row",
+      "title": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 AI Assistant \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+      "gridPos": {
+        "x": 0,
+        "y": 5,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "id": 5,
+      "title": "Questions Answered",
+      "type": "stat",
+      "gridPos": {
+        "x": 0,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "rag_total_requests_total",
+          "datasource": {
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      }
+    },
+    {
+      "id": 6,
+      "title": "Confidence",
+      "type": "stat",
+      "gridPos": {
+        "x": 6,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "rag_avg_confidence_score",
+          "datasource": {
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
           "fields": "",
           "values": false
         },
         "textMode": "auto"
       },
-      "pluginVersion": "10.4.0",
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "title": "Response Time (ms)",
+      "type": "stat",
+      "gridPos": {
+        "x": 12,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
       "targets": [
         {
+          "refId": "A",
+          "expr": "rag_avg_llm_latency_ms + rag_avg_search_latency_ms",
           "datasource": {
-            "type": "prometheus",
-            "uid": "Prometheus"
-          },
-          "expr": "rag_avg_search_latency_ms",
-          "refId": "A"
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
         }
       ],
-      "title": "Avg Search Latency (ms)",
-      "type": "stat"
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      }
+    },
+    {
+      "id": 8,
+      "title": "Helpful Feedback",
+      "type": "stat",
+      "gridPos": {
+        "x": 18,
+        "y": 6,
+        "w": 6,
+        "h": 4
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "(rag_helpful_feedback_total / (rag_helpful_feedback_total + rag_unhelpful_feedback_total)) * 100",
+          "datasource": {
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        }
+      }
+    },
+    {
+      "id": 102,
+      "type": "row",
+      "title": "\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 Insights \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500",
+      "gridPos": {
+        "x": 0,
+        "y": 10,
+        "w": 24,
+        "h": 1
+      }
+    },
+    {
+      "id": 9,
+      "title": "Top Services",
+      "type": "barchart",
+      "gridPos": {
+        "x": 0,
+        "y": 11,
+        "w": 8,
+        "h": 8
+      },
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT service_name, COUNT(*) as count FROM dbo_mart.mart_incident_summary GROUP BY service_name ORDER BY count DESC",
+          "format": "table"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": 10,
+      "title": "Root Causes",
+      "type": "barchart",
+      "gridPos": {
+        "x": 8,
+        "y": 11,
+        "w": 8,
+        "h": 8
+      },
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT primary_root_cause_category, COUNT(*) as count FROM dbo_mart.mart_incident_summary GROUP BY primary_root_cause_category ORDER BY count DESC",
+          "format": "table"
+        }
+      ],
+      "options": {
+        "orientation": "horizontal"
+      }
+    },
+    {
+      "id": 11,
+      "title": "API Uptime",
+      "type": "stat",
+      "gridPos": {
+        "x": 16,
+        "y": 11,
+        "w": 8,
+        "h": 3
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "up{job='backend'} * 100",
+          "datasource": {
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "title": "Embedding Index",
+      "type": "stat",
+      "gridPos": {
+        "x": 16,
+        "y": 14,
+        "w": 8,
+        "h": 2
+      },
+      "datasource": {
+        "uid": "P8EDE85F80A37D6DB",
+        "type": "mssql"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "datasource": {
+            "uid": "P8EDE85F80A37D6DB",
+            "type": "mssql"
+          },
+          "rawSql": "SELECT COUNT(*) FROM dbo.raw_events",
+          "format": "table"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      }
+    },
+    {
+      "id": 13,
+      "title": "Last Sync",
+      "type": "stat",
+      "gridPos": {
+        "x": 16,
+        "y": 16,
+        "w": 8,
+        "h": 3
+      },
+      "datasource": {
+        "uid": "PBFA97CFB590B2093",
+        "type": "prometheus"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "expr": "time() - process_start_time_seconds{job='backend'}",
+          "datasource": {
+            "uid": "PBFA97CFB590B2093",
+            "type": "prometheus"
+          }
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "unit": "s"
+        }
+      }
     }
   ],
-  "schemaVersion": 39,
-  "tags": [],
-  "templating": {
-    "list": []
-  },
   "time": {
     "from": "now-6h",
     "to": "now"
-  },
-  "timepicker": {},
-  "timezone": "browser",
-  "title": "Incident Intelligence Overview",
-  "uid": "e15967ee-e0fa-400c-b26a-b2f518e98629",
-  "version": 1
+  }
 }

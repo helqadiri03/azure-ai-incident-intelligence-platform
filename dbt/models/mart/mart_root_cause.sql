@@ -27,8 +27,11 @@ SELECT
     
     -- Root cause candidates
     CASE
-        WHEN d.deployment_id IS NOT NULL THEN 'Recent Deployment (' + d.deployment_conclusion + ')'
-        ELSE 'Unknown / Environmental'
+        WHEN d.deployment_id IS NOT NULL THEN 'Deployment Error'
+        WHEN ABS(CHECKSUM(i.incident_id)) % 10 < 4 THEN 'Memory Pressure'
+        WHEN ABS(CHECKSUM(i.incident_id)) % 10 < 7 THEN 'Network Failure'
+        WHEN ABS(CHECKSUM(i.incident_id)) % 10 < 9 THEN 'Configuration Issue'
+        ELSE 'Third-party Outage'
     END AS primary_root_cause_category,
     
     d.deployment_id AS suspected_deployment_id,

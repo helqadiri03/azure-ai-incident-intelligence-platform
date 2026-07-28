@@ -62,6 +62,9 @@ RAG_REQUESTS = Counter('rag_total_requests', 'Total RAG requests')
 RAG_TOKENS = Counter('rag_total_tokens_approx', 'Approximate total tokens used')
 SEARCH_LATENCY = Gauge('rag_avg_search_latency_ms', 'Moving average of search latency')
 LLM_LATENCY = Gauge('rag_avg_llm_latency_ms', 'Moving average of LLM latency')
+RAG_CONFIDENCE = Gauge('rag_avg_confidence_score', 'Moving average of agent confidence')
+HELPFUL_FEEDBACK = Counter('rag_helpful_feedback_total', 'Total helpful feedback')
+UNHELPFUL_FEEDBACK = Counter('rag_unhelpful_feedback_total', 'Total unhelpful feedback')
 
 # Keep old dict for UI metrics panel compatibility
 METRICS = {
@@ -166,6 +169,10 @@ def submit_feedback(req: FeedbackRequest):
     record["timestamp"] = time.time()
     with open(FEEDBACK_LOG, "a") as f:
         f.write(json.dumps(record) + "\n")
+    if req.rating == "helpful":
+        HELPFUL_FEEDBACK.inc()
+    else:
+        UNHELPFUL_FEEDBACK.inc()
     return {"status": "recorded"}
 
 
@@ -247,6 +254,7 @@ async def chat(request: ChatRequest):
     RAG_TOKENS.inc(tokens)
     SEARCH_LATENCY.set(METRICS["avg_search_latency_ms"])
     LLM_LATENCY.set(METRICS["avg_llm_latency_ms"])
+    RAG_CONFIDENCE.set(confidence * 100)
 
     # Build response
     sources = [
